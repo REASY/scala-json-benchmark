@@ -5,19 +5,16 @@ import argonaut._
 import models.{Bird, Place}
 
 class ArgonautMarshaller extends Marshaller {
+  @transient implicit lazy val placeCodecJson: CodecJson[Place] =
+    casecodec5(Place.apply, Place.unapply)("name", "_id", "latlon", "description", "michelin_rate")
+  @transient implicit lazy val birdCodecJson: CodecJson[Bird] =
+    casecodec5(Bird.apply, Bird.unapply)("scientific_name", "common_names", "sights", "wing_span", "hangs_out")
+
   def parse(s: String): Bird = {
-    implicit val placeCodecJson: CodecJson[Place] =
-      casecodec5(Place.apply, Place.unapply)("name", "_id", "latlon", "description", "michelin_rate")
-    implicit val birdCodecJson: CodecJson[Bird] =
-      casecodec5(Bird.apply, Bird.unapply)("scientific_name", "common_names", "sights", "wing_span", "hangs_out")
-    Parse.decodeOption[Bird](s).get
+       Parse.decodeOption[Bird](s).get
   }
 
   def toStr(bird: Bird): String = {
-    implicit val placeCodecJson: CodecJson[Place] =
-      casecodec5(Place.apply, Place.unapply)("name", "_id", "latlon", "description", "michelin_rate")
-    implicit val birdCodecJson: CodecJson[Bird] =
-      casecodec5(Bird.apply, Bird.unapply)("scientific_name", "common_names", "sights", "wing_span", "hangs_out")
     bird.asJson.toString
   }
 }

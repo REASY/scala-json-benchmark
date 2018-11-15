@@ -12,38 +12,49 @@ case class ParserBenchmarkData
 )
 
 object ParserBenchmark extends ForkedTime{
-  @transient private val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
-    .getLines()
-    .toArray
-  def genData: Gen[ParserBenchmarkData] = Gen.single("ParserBenchmark")(ParserBenchmarkData(data, data.length))
+  def genData(data: Array[String]): Gen[ParserBenchmarkData] = {
+    Gen.single("ParserBenchmark")(ParserBenchmarkData(data, data.length))
+  }
 
   performance of "Json4SMarshaller" in {
-    measureParse(new Json4SMarshaller)
+    measureParse("Json4SMarshaller")
   }
 
   performance of "LiftMarshaller" in {
-    measureParse(new LiftMarshaller)
+    measureParse("LiftMarshaller")
   }
 
   performance of "PlayMarshaller" in {
-    measureParse(new PlayMarshaller)
+    measureParse("PlayMarshaller")
   }
 
   performance of "ArgonautMarshaller" in {
-    measureParse(new ArgonautMarshaller)
+    measureParse("ArgonautMarshaller")
   }
 
   performance of "SprayMarshaller" in {
-    measureParse(new SprayMarshaller)
+    measureParse("SprayMarshaller")
   }
 
   performance of "CircleMarshaller" in {
-    measureParse(new CircleMarshaller)
+    measureParse("CircleMarshaller")
   }
 
-  private def measureParse(parser: Marshaller): Unit = {
+  private def measureParse(parserType: String): Unit = {
+    val parser = parserType match {
+      case "CircleMarshaller" => new CircleMarshaller
+      case "SprayMarshaller" => new SprayMarshaller
+      case "ArgonautMarshaller" => new ArgonautMarshaller
+      case "PlayMarshaller" => new PlayMarshaller
+      case "LiftMarshaller" => new LiftMarshaller
+      case "Json4SMarshaller" => new Json4SMarshaller
+    }
+    val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
+      .getLines()
+      .take(1)
+      .toArray
     measure.method("parse") in {
-      using(genData) in { pb =>
+      using(genData(data)) in { pb =>
         pb.data.map(parser.parse)
       }
     }

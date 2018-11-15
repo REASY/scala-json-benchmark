@@ -13,40 +13,52 @@ case class ToStrBenchmarkData
 )
 
 object ToStrBenchmark extends ForkedTime {
-  @transient private val tempParser = new CircleMarshaller
-  @transient private val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
-    .getLines().toArray
-    .map { jsonStr => tempParser.parse(jsonStr) }
-  def genData: Gen[ToStrBenchmarkData] = Gen.single("ToStrBenchmark")(ToStrBenchmarkData(birds, birds.length))
+  def genData(birds: Array[Bird]): Gen[ToStrBenchmarkData] = {
+    Gen.single("ToStrBenchmark")(ToStrBenchmarkData(birds, birds.length))
+  }
 
   performance of "Json4SMarshaller" in {
-    measureToStr(new Json4SMarshaller)
+    measureToStr("Json4SMarshaller")
   }
 
   performance of "LiftMarshaller" in {
-    measureToStr(new LiftMarshaller)
+    measureToStr("LiftMarshaller")
   }
 
   performance of "PlayMarshaller" in {
-    measureToStr(new PlayMarshaller)
+    measureToStr("PlayMarshaller")
   }
 
   performance of "ArgonautMarshaller" in {
-    measureToStr(new ArgonautMarshaller)
+    measureToStr("ArgonautMarshaller")
   }
 
   performance of "SprayMarshaller" in {
-    measureToStr(new SprayMarshaller)
+    measureToStr("SprayMarshaller")
   }
 
   performance of "CircleMarshaller" in {
-    measureToStr(new CircleMarshaller)
+    measureToStr("CircleMarshaller")
   }
 
-  private def measureToStr(marshaller: Marshaller): Unit = {
+  private def measureToStr(parserType: String): Unit = {
+    val tempParser = new CircleMarshaller
+    val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
+      .getLines().take(1).toArray
+      .map { jsonStr => tempParser.parse(jsonStr) }
+
+    val parser = parserType match {
+      case "CircleMarshaller" => new CircleMarshaller
+      case "SprayMarshaller" => new SprayMarshaller
+      case "ArgonautMarshaller" => new ArgonautMarshaller
+      case "PlayMarshaller" => new PlayMarshaller
+      case "LiftMarshaller" => new LiftMarshaller
+      case "Json4SMarshaller" => new Json4SMarshaller
+    }
+
     measure.method("toStr") in {
-      using(genData) in { pb =>
-        pb.data.map(marshaller.toStr)
+      using(genData(birds)) in { pb =>
+        pb.data.map(parser.toStr)
       }
     }
   }
