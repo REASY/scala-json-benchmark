@@ -10,8 +10,12 @@ resolvers ++= Seq(
   "Apache repo" at "https://repository.apache.org/content/repositories/releases",
   "JBoss repo" at "http://repository.jboss.org/nexus/content/groups/public-jboss",
   "Sonatype repo" at "https://oss.sonatype.org/content/repositories/releases",
+  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
   "Mvnrepository" at "http://mvnrepository.com/artifact"
 )
+dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-core" % "2.9.6"
+dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.6"
+dependencyOverrides += "com.fasterxml.jackson.module" % "jackson-module-scala_2.12" % "2.9.6"
 
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
 
@@ -19,7 +23,7 @@ parallelExecution in Test := false
 fork in test := true
 
 libraryDependencies ++= Seq(
-  "com.storm-enroute" %% "scalameter" % "0.8.2",
+  "com.storm-enroute" %% "scalameter" % "0.9-SNAPSHOT",
   "org.json4s" %% "json4s-jackson" % "3.6.2",
   "io.spray" %% "spray-json" % "1.3.5",
   "net.liftweb" %% "lift-json" % "3.3.0",
