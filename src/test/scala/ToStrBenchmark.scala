@@ -1,8 +1,8 @@
-import models.Bird
-import org.scalameter.api._
-import org.scalameter.picklers.noPickler._
-import org.scalameter.{Gen, Reporter}
 import marshallers._
+import models.Bird
+import org.scalameter.Bench.OfflineReport
+import org.scalameter.Gen
+import org.scalameter.picklers.noPickler._
 
 import scala.io.Source
 
@@ -12,21 +12,12 @@ case class ToStrBenchmarkData
   len: Long
 )
 
-object ToStrBenchmark extends Bench[Double]{
-  val tempParser = new CircleMarshaller
-  val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
+object ToStrBenchmark extends OfflineReport {
+  lazy val tempParser = new CircleMarshaller
+  lazy val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
     .getLines().toArray
     .map { jsonStr => tempParser.parse(jsonStr) }
   def genData: Gen[ToStrBenchmarkData] = Gen.single("ToStrBenchmark")(ToStrBenchmarkData(birds, birds.length))
-
-  lazy val executor = LocalExecutor(new Executor.Warmer.Default, Aggregator.average, measurer)
-  lazy val reporter: Reporter[Double] = new LoggingReporter[Double]
-  lazy val persistor: Persistor = Persistor.None
-  lazy val measurer: Measurer[Double] = new Measurer.Default
-
-  performance of "CircleMarshaller" in {
-    measureToStr(new CircleMarshaller)
-  }
 
   performance of "Json4SMarshaller" in {
     measureToStr(new Json4SMarshaller)
@@ -46,6 +37,10 @@ object ToStrBenchmark extends Bench[Double]{
 
   performance of "SprayMarshaller" in {
     measureToStr(new SprayMarshaller)
+  }
+
+  performance of "CircleMarshaller" in {
+    measureToStr(new CircleMarshaller)
   }
 
   private def measureToStr(marshaller: Marshaller): Unit = {

@@ -2,6 +2,7 @@ import org.scalameter.api._
 import org.scalameter.picklers.noPickler._
 import org.scalameter.{Gen, Reporter}
 import marshallers._
+import org.scalameter.Bench.OfflineReport
 
 import scala.io.Source
 
@@ -11,20 +12,11 @@ case class ParserBenchmarkData
   len: Long
 )
 
-object ParserBenchmark extends Bench[Double]{
-  val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
+object ParserBenchmark extends OfflineReport{
+  lazy val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
     .getLines()
     .toArray
   def genData: Gen[ParserBenchmarkData] = Gen.single("ParserBenchmark")(ParserBenchmarkData(data, data.length))
-
-  lazy val executor = LocalExecutor(new Executor.Warmer.Default, Aggregator.average, measurer)
-  lazy val reporter: Reporter[Double] = new LoggingReporter[Double]
-  lazy val persistor: Persistor = Persistor.None
-  lazy val measurer: Measurer[Double] = new Measurer.Default
-
-  performance of "CircleMarshaller" in {
-    measureParse(new CircleMarshaller)
-  }
 
   performance of "Json4SMarshaller" in {
     measureParse(new Json4SMarshaller)
@@ -44,6 +36,10 @@ object ParserBenchmark extends Bench[Double]{
 
   performance of "SprayMarshaller" in {
     measureParse(new SprayMarshaller)
+  }
+
+  performance of "CircleMarshaller" in {
+    measureParse(new CircleMarshaller)
   }
 
   private def measureParse(parser: Marshaller): Unit = {
