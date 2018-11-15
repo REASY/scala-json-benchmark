@@ -11,6 +11,7 @@ class Json4SMarshaller extends Marshaller {
   }
 
   def toStr(bird: Bird): String = {
-    Serialization.write(bird)(DefaultFormats)
+    implicit val formats: Formats = DefaultFormats
+    Serialization.write(bird)
   }
 }

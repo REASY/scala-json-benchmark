@@ -1,8 +1,7 @@
-import org.scalameter.api._
-import org.scalameter.picklers.noPickler._
-import org.scalameter.{Gen, Reporter}
 import marshallers._
-import org.scalameter.Bench.OfflineReport
+import org.scalameter.Bench.ForkedTime
+import org.scalameter.Gen
+import org.scalameter.picklers.noPickler._
 
 import scala.io.Source
 
@@ -12,8 +11,8 @@ case class ParserBenchmarkData
   len: Long
 )
 
-object ParserBenchmark extends OfflineReport{
-  lazy val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
+object ParserBenchmark extends ForkedTime{
+  @transient private val data: Array[String] = Source.fromFile(getClass.getResource("birds.data").getFile)
     .getLines()
     .toArray
   def genData: Gen[ParserBenchmarkData] = Gen.single("ParserBenchmark")(ParserBenchmarkData(data, data.length))

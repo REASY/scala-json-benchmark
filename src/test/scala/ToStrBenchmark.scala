@@ -1,6 +1,6 @@
 import marshallers._
 import models.Bird
-import org.scalameter.Bench.OfflineReport
+import org.scalameter.Bench.ForkedTime
 import org.scalameter.Gen
 import org.scalameter.picklers.noPickler._
 
@@ -12,9 +12,9 @@ case class ToStrBenchmarkData
   len: Long
 )
 
-object ToStrBenchmark extends OfflineReport {
-  lazy val tempParser = new CircleMarshaller
-  lazy val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
+object ToStrBenchmark extends ForkedTime {
+  @transient private val tempParser = new CircleMarshaller
+  @transient private val birds: Array[Bird] = Source.fromFile(getClass.getResource("birds.data").getFile)
     .getLines().toArray
     .map { jsonStr => tempParser.parse(jsonStr) }
   def genData: Gen[ToStrBenchmarkData] = Gen.single("ToStrBenchmark")(ToStrBenchmarkData(birds, birds.length))
