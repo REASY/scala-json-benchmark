@@ -5,7 +5,7 @@ import net.liftweb.json.Formats
 import net.liftweb.json.Serialization.{read, write}
 
 class LiftMarshaller extends Marshaller {
-  @transient implicit lazy val formats: Formats = net.liftweb.json.DefaultFormats
+  implicit val formats: Formats = net.liftweb.json.DefaultFormats
 
   def parse(s: String): Bird = {
     read[Bird](s)
