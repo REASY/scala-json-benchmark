@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit
 @State(Scope.Thread)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-class ParserBenchmark {
-  import ParserBenchmark._
+class DeserializationBenchmark {
+  import DeserializationBenchmark._
 
   @Benchmark
   def Json4SMarshaller_parse(): Int = {
@@ -57,7 +57,7 @@ class ParserBenchmark {
   }
 }
 
-object ParserBenchmark {
+object DeserializationBenchmark {
   val data: Array[String] = Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("birds.data"), StandardCharsets.UTF_8.name())
     .getLines()
     .toArray

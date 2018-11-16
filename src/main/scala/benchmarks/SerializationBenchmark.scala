@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit
 @State(Scope.Thread)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-class ToStrBenchmark{
-  import ToStrBenchmark._
+class SerializationBenchmark{
+  import SerializationBenchmark._
 
   @Benchmark
   def Json4SMarshaller_toStr(): Int = {
@@ -57,7 +57,7 @@ class ToStrBenchmark{
     strs.length
   }
 }
-object ToStrBenchmark {
+object SerializationBenchmark {
   val tempParser = new CircleMarshaller
   val birds: Array[Bird] = Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("birds.data"), StandardCharsets.UTF_8.name())
     .getLines().toArray
