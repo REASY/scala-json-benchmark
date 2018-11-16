@@ -13,17 +13,8 @@ resolvers ++= Seq(
   "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
   "Mvnrepository" at "http://mvnrepository.com/artifact"
 )
-dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-core" % "2.9.6"
-dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.6"
-dependencyOverrides += "com.fasterxml.jackson.module" % "jackson-module-scala_2.12" % "2.9.6"
-
-testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
-
-parallelExecution in Test := false
-fork in test := true
 
 libraryDependencies ++= Seq(
-  "com.storm-enroute" %% "scalameter" % "0.9-SNAPSHOT",
   "org.json4s" %% "json4s-jackson" % "3.6.2",
   "io.spray" %% "spray-json" % "1.3.5",
   "net.liftweb" %% "lift-json" % "3.3.0",
@@ -36,4 +27,6 @@ libraryDependencies ++= Seq(
   "io.argonaut" %% "argonaut-monocle" % "6.2.2",
   "io.argonaut" %% "argonaut-cats" % "6.2.2"
 )
+
+enablePlugins(JmhPlugin)
 
