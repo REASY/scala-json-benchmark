@@ -12,9 +12,9 @@ When decision about JSON library should be made because of performance, this ben
 This project also demonstrates how to use these different JSON libraries to serialize/deserialize a Scala `case class`.
 
 ### Benchmark
-Dataset and types `Bird` and `Place` from this repo: [scala-json-benchmark](https://github.com/nlw0/scala-json-benchmark). For benchmark used [ScalaMeter](https://scalameter.github.io/). File [birds.data](src/test/resources/birds.data) contains 25000 lines. Each of line is serialized json of `Bird`.
-- Serialization benchmark is in [ToStrBenchmark.scala](src/test/scala/ToStrBenchmark.scala). To run it use `testOnly ToStrBenchmark` in `SBT`
-- Deserialization benchmark is in [ParserBenchmark.scala](src/test/scala/ParserBenchmark.scala). To run it use `testOnly ParserBenchmark` in `SBT`
+Dataset and types `Bird` and `Place` from this repo: [scala-json-benchmark](https://github.com/nlw0/scala-json-benchmark). For benchmark used [jmh](https://openjdk.java.net/projects/code-tools/jmh/) via [sbt-jmh plugin](https://github.com/ktoso/sbt-jmh/). File [birds.data](src/test/resources/birds.data) contains 25000 lines. Each of line is serialized json of `Bird`.
+- Serialization benchmark is in [SerializationBenchmark.scala](src/test/scala/SerializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*SerializationBenchmark*` in `SBT`
+- Deserialization benchmark is in [DeserializationBenchmark.scala](src/test/scala/DeserializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*DeserializationBenchmark*` in `SBT`
 
 ### Results
 My machine is MacBook Pro (Retina, 13-inch, Early 2015):
@@ -26,20 +26,20 @@ My machine is MacBook Pro (Retina, 13-inch, Early 2015):
 ##### Serialization
 | Library   | Time, ms|
 | ----------| -------:|
-| circle    | 150.1   |
-| spray     | 201.94  |
-| Argonaut  | 257.26  |
-| lift      | 267.52  |
-| play-json | 293.95  |
-| json4s    | 475.61  |
+| circle    | 156.576 |
+| spray     | 192.525 |
+| lift      | 239.84  |
+| play-json | 320.698 |
+| Argonaut  | 357.016 |
+| json4s    | 428.688 |
 
 ##### Deserialization
 | Library   | Time, ms|
 | ----------| -------:|
-| circle    | 209.77  |
-| spray     | 237.59  |
-| lift      | 408.49  |
-| Argonaut  | 433.61  |
-| play-json | 604.79  |
-| json4s    | 709     |
+| spray     | 197.184 |
+| circle    | 200.542 |
+| lift      | 241.208 |
+| Argonaut  | 369.29  |
+| play-json | 403.642 |
+| json4s    | 500.197 |
 
