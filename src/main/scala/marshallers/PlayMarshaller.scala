@@ -3,7 +3,6 @@ package marshallers
 import models.{Bird, Place}
 import play.api.libs.json._
 
-
 class PlayMarshaller extends Marshaller {
   implicit val placeReads: Reads[Place] = Json.reads[Place]
   implicit val birdReads: Reads[Bird] = Json.reads[Bird]

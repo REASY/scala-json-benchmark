@@ -8,7 +8,6 @@ import models.{Bird, Place}
 class CircleMarshaller extends Marshaller {
   implicit val placeDecoder: Decoder[Place] = deriveDecoder[Place]
   implicit val birdDecoder: Decoder[Bird] = deriveDecoder[Bird]
-
   implicit val placeEncoder: Encoder[Place] = deriveEncoder[Place]
   implicit val birdEncoder: Encoder[Bird] = deriveEncoder[Bird]
 
