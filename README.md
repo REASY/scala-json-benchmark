@@ -13,8 +13,8 @@ This project also demonstrates how to use these different JSON libraries to seri
 
 ### Benchmark
 Dataset and types `Bird` and `Place` from this repo: [scala-json-benchmark](https://github.com/nlw0/scala-json-benchmark). For benchmark used [jmh](https://openjdk.java.net/projects/code-tools/jmh/) via [sbt-jmh plugin](https://github.com/ktoso/sbt-jmh/). File [birds.data](src/test/resources/birds.data) contains 25000 lines. Each of line is serialized json of `Bird`.
-- Serialization benchmark is in [SerializationBenchmark.scala](src/test/scala/SerializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*SerializationBenchmark*` in `SBT`
-- Deserialization benchmark is in [DeserializationBenchmark.scala](src/test/scala/DeserializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*DeserializationBenchmark*` in `SBT`
+- Serialization benchmark is in [SerializationBenchmark.scala](src/main/scala/SerializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*SerializationBenchmark*` in `SBT`
+- Deserialization benchmark is in [DeserializationBenchmark.scala](src/main/scala/DeserializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*DeserializationBenchmark*` in `SBT`
 
 ### Results
 My machine is MacBook Pro (Retina, 13-inch, Early 2015):
