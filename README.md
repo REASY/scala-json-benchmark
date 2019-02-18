@@ -22,25 +22,27 @@ My machine is MacBook Pro (Retina, 13-inch, Early 2015):
 - OS: macOS Sierra 10.12.6
 - CPU: Intel Core i7 3.1 GHz
 - Memory: 16 GB
-- JVM: Java HotSpot(TM) 64-Bit Server VM v25.152-b16
+- JVM: Java HotSpot(TM) 64-Bit Server VM, 25.181-b13
 
 ##### Serialization
 | Library   | Time, ms|
 | ----------| -------:|
-| circle    | 156.576 |
-| spray     | 192.525 |
-| lift      | 239.84  |
-| play-json | 320.698 |
-| Argonaut  | 357.016 |
-| json4s    | 428.688 |
+| jsoniter  |  50.113 |
+| circle    | 140.868 |
+| spray     | 165.045 |
+| lift      | 206.377 |
+| play-json | 261.774 |
+| Argonaut  | 306.668 |
+| json4s    | 385.766 |
 
 ##### Deserialization
 | Library   | Time, ms|
 | ----------| -------:|
-| spray     | 197.184 |
-| circle    | 200.542 |
-| lift      | 241.208 |
-| Argonaut  | 369.29  |
-| play-json | 403.642 |
-| json4s    | 500.197 |
+| jsoniter  | 78.070  |
+| circle    | 130.938 |
+| spray     | 180.159 |
+| lift      | 220.421 |
+| Argonaut  | 319.450 |
+| play-json | 357.515 |
+| json4s    | 467.872 |
 
