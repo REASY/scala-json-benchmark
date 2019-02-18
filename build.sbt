@@ -25,7 +25,9 @@ libraryDependencies ++= Seq(
   "io.argonaut" %% "argonaut" % "6.2.2",
   "io.argonaut" %% "argonaut-scalaz" % "6.2.2",
   "io.argonaut" %% "argonaut-monocle" % "6.2.2",
-  "io.argonaut" %% "argonaut-cats" % "6.2.2"
+  "io.argonaut" %% "argonaut-cats" % "6.2.2",
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % "0.41.0" % Compile,
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "0.41.0" % Provided // required only in compile-time
 )
 
 enablePlugins(JmhPlugin)

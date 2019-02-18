@@ -8,6 +8,7 @@ When decision about JSON library should be made because of performance, this ben
 - [Lift](https://github.com/lift/framework/tree/master/core/json)
 - [spray-json](https://github.com/spray/spray-json)
 - [play-json](https://github.com/playframework/play-json)
+- [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala)
 
 This project also demonstrates how to use these different JSON libraries to serialize/deserialize a Scala `case class`.
 

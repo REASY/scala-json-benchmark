@@ -56,6 +56,13 @@ class SerializationBenchmark{
     val strs = birds.map(parser.toStr)
     strs.length
   }
+
+  @Benchmark
+  def JsoniterMarshaller_toStr(): Int = {
+    val parser = new JsoniterMarshaller
+    val strs = birds.map(parser.toStr)
+    strs.length
+  }
 }
 object SerializationBenchmark {
   val tempParser = new CircleMarshaller

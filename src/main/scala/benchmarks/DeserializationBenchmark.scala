@@ -55,6 +55,13 @@ class DeserializationBenchmark {
     val parsed = data.map(parser.parse)
     parsed.length
   }
+
+  @Benchmark
+  def JsoniterMarshaller_parse(): Int = {
+    val parser = new JsoniterMarshaller
+    val parsed = data.map(parser.parse)
+    parsed.length
+  }
 }
 
 object DeserializationBenchmark {
