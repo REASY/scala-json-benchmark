@@ -28,7 +28,7 @@ Dataset and types ([Bird](src/main/scala/models/Bird.scala) and [Place](src/main
 | Library   | Time, ms|
 | ----------| -------:|
 | jsoniter  |  50.113 |
-| circle    | 140.868 |
+| circe     | 140.868 |
 | spray     | 165.045 |
 | lift      | 206.377 |
 | play-json | 261.774 |
@@ -39,7 +39,7 @@ Dataset and types ([Bird](src/main/scala/models/Bird.scala) and [Place](src/main
 | Library   | Time, ms|
 | ----------| -------:|
 | jsoniter  | 78.070  |
-| circle    | 130.938 |
+| circe     | 130.938 |
 | spray     | 180.159 |
 | lift      | 220.421 |
 | Argonaut  | 319.450 |
@@ -56,7 +56,7 @@ Dataset and types ([Bird](src/main/scala/models/Bird.scala) and [Place](src/main
 | Library   | Time, ms|
 | ----------| -------:|
 | jsoniter  |  41.140 |
-| circle    | 104.434 |
+| circe     | 104.434 |
 | spray     | 132.525 |
 | lift      | 171.015 |
 | play-json | 215.128 |
@@ -67,7 +67,7 @@ Dataset and types ([Bird](src/main/scala/models/Bird.scala) and [Place](src/main
 | Library   | Time, ms|
 | ----------| -------:|
 | jsoniter  | 68.833  |
-| circle    | 117.592 |
+| circe     | 117.592 |
 | spray     | 155.961 |
 | lift      | 220.304 |
 | Argonaut  | 264.283 |
