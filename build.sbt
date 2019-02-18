@@ -15,13 +15,13 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.json4s" %% "json4s-jackson" % "3.6.2",
+  "org.json4s" %% "json4s-jackson" % "3.6.4",
   "io.spray" %% "spray-json" % "1.3.5",
   "net.liftweb" %% "lift-json" % "3.3.0",
   "com.typesafe.play" %% "play-json" % "2.6.10",
-  "io.circe" %% "circe-core" % "0.10.0",
-  "io.circe" %% "circe-generic" % "0.10.0",
-  "io.circe" %% "circe-parser" % "0.10.0",
+  "io.circe" %% "circe-core" % "0.11.1",
+  "io.circe" %% "circe-generic" % "0.11.1",
+  "io.circe" %% "circe-parser" % "0.11.1",
   "io.argonaut" %% "argonaut" % "6.2.2",
   "io.argonaut" %% "argonaut-scalaz" % "6.2.2",
   "io.argonaut" %% "argonaut-monocle" % "6.2.2",
