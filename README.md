@@ -18,7 +18,7 @@ Dataset and types `Bird` and `Place` from this repo: [scala-json-benchmark](http
 - Deserialization benchmark is in [DeserializationBenchmark.scala](src/main/scala/benchmarks/DeserializationBenchmark.scala). To run it use `jmh:run -i 5 -wi 5 -f1 -t1 .*DeserializationBenchmark*` in `SBT`
 
 ### Results
-My machine is MacBook Pro (Retina, 13-inch, Early 2015):
+#### MacBook Pro (Retina, 13-inch, Early 2015):
 - OS: macOS Sierra 10.12.6
 - CPU: Intel Core i7 3.1 GHz
 - Memory: 16 GB
@@ -45,4 +45,32 @@ My machine is MacBook Pro (Retina, 13-inch, Early 2015):
 | Argonaut  | 319.450 |
 | play-json | 357.515 |
 | json4s    | 467.872 |
+
+#### Desktop machine:
+- OS: Microsoft Windows 10 Pro N  x64 [Version 10.0.17134.590]
+- CPU: AMD Ryzen 7 2700X Eight-Core Processor i7 3.7 GHz
+- Memory: DDR4-3200 GHz 16 GB
+- JVM: Java HotSpot(TM) 64-Bit Server VM, 25.201-b09
+
+##### Serialization
+| Library   | Time, ms|
+| ----------| -------:|
+| jsoniter  |  41.140 |
+| circle    | 104.434 |
+| spray     | 132.525 |
+| lift      | 171.015 |
+| play-json | 215.128 |
+| Argonaut  | 255.371 |
+| json4s    | 310.488 |
+
+##### Deserialization
+| Library   | Time, ms|
+| ----------| -------:|
+| jsoniter  | 68.833  |
+| circle    | 117.592 |
+| spray     | 155.961 |
+| lift      | 220.304 |
+| Argonaut  | 264.283 |
+| play-json | 342.450 |
+| json4s    | 403.946 |
 
