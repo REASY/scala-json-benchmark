@@ -51,8 +51,8 @@ class SerializationBenchmark{
   }
 
   @Benchmark
-  def CircleMarshaller_toStr(): Int = {
-    val parser = new CircleMarshaller
+  def CirceMarshaller_toStr(): Int = {
+    val parser = new CirceMarshaller
     val strs = birds.map(parser.toStr)
     strs.length
   }
@@ -65,7 +65,7 @@ class SerializationBenchmark{
   }
 }
 object SerializationBenchmark {
-  val tempParser = new CircleMarshaller
+  val tempParser = new CirceMarshaller
   val birds: Array[Bird] = Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("birds.data"), StandardCharsets.UTF_8.name())
     .getLines().toArray
     .map { jsonStr => tempParser.parse(jsonStr) }

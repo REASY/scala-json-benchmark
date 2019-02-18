@@ -5,7 +5,7 @@ import io.circe.generic.semiauto._
 import io.circe.syntax._
 import models.{Bird, Place}
 
-class CircleMarshaller extends Marshaller {
+class CirceMarshaller extends Marshaller {
   implicit val placeDecoder: Decoder[Place] = deriveDecoder[Place]
   implicit val birdDecoder: Decoder[Bird] = deriveDecoder[Bird]
   implicit val placeEncoder: Encoder[Place] = deriveEncoder[Place]

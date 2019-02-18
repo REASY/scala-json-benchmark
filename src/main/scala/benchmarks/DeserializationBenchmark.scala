@@ -22,8 +22,8 @@ class DeserializationBenchmark {
   }
 
   @Benchmark
-  def CircleMarshaller_parse(): Int = {
-    val parser = new CircleMarshaller
+  def CirceMarshaller_parse(): Int = {
+    val parser = new CirceMarshaller
     val parsed = data.map(parser.parse)
     parsed.length
   }
